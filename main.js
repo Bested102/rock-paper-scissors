@@ -61,17 +61,26 @@ function getEmojiForChoice(choice) {
 }
 
 let cycleCount = 0;
-let choices = ["rock", "paper", "scissors"];
 let delay = 40;
 
 function cycle() {
+  let choices = ["rock", "paper", "scissors"];
   computerChoiceValue = choices[Math.floor(Math.random() * choices.length)];
   setComputerChoice();
   cycleCount++;
-  delay += 15;
+  delay += 10;
   if (cycleCount < 20) {
     setTimeout(cycle, delay);
   } else {
+    if (playerChoiceValue === "rock") {
+      choices = ["rock", "paper", "paper"];
+    } else if (playerChoiceValue === "paper") {
+      choices = ["paper", "scissors", "scissors"];
+    } else if (playerChoiceValue === "scissors") {
+      choices = ["scissors", "rock", "rock"];
+    }
+    computerChoiceValue = choices[Math.floor(Math.random() * choices.length)];
+    setComputerChoice();
     startBattle();
     cycleCount = 0;
     delay = 50;
